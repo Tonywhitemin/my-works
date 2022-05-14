@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>結果網頁</title>
+<style type="text/css">
+body {background-image:url("http://127.0.0.1:5000/static/background.jpeg");
+      background-size:1920px 1080px ;
+      background-attachment:scroll
+     }
+a.restart{font-weight: bold;color: red;align-self:center;}
+table{
+    width:1200px;border:2px solid #888888;
+}
+td{
+    border:1px solid #888888; padding:10px
+}
+th{
+    background-color: #7788aa;border:1px
+}
+</style>
+</head>
+<body>
+    <p>step 3.請點選下方"按我下載檔案"以後，從檔案中找尋有興趣的職缺內容</p>
+    <a href="http://127.0.0.1:5000/static/for_download.xlsx">按我下載檔案</a>
+    <br>
+    <hr>
+    <p>step 4.請填入從Excel中看到喜歡工作的"ID"欄位並輸入期望找尋幾筆推薦的資料</p>
+    <img src="http://127.0.0.1:5000/static/ID.png">
+    <form action="/Suggestion" method="GET"><!--注意:前端是打method，後端python要打method"s"-->
+        ID為 <input type="text" name="ID"/> <!--ID表示要求字串的名稱，對應後端args資料-->
+
+    <form action="/Suggestion" method="GET"><!--注意:前端是打method，後端python要打method"s"-->
+        推薦資料筆數<input type="text" name="suggestion_num"/>
+    <button>得到推薦內容</button>
+    </form>
+    <hr>
+    <a class="restart" href="http://127.0.0.1:5000/restart">=>若須重新搜尋請點我</a>
+    <hr>
+    
+    </table>
+    <br/> <!--#表示換行-->
+    <p><h1>搜尋結果如下：</h1></p>
+    <p>與你所選的ID：{{ID}}</p>
+    <p>公司名稱為：{{search_comp}}</p>
+    <p>職稱是：{{search_job_title}}</p>
+    <p>近似值相近的{{suggestion_num}}筆資料如下:</p>
+    <table>
+        <thead>
+            <th>相似值</th>
+            <th>職稱</th>
+            <th>公司名稱</th>
+            <th>職務描述</th>
+        </thead>
+
+        <tbody>
+            {% for rec in recs %}
+                <tr>
+                    <td>{{ rec[0] }}</td>
+                    <td>{{ rec[1] }}</td>
+                    <td>{{ rec[2] }}</td>
+                    <td>{{ rec[3] }}</td>
+                </tr>
+            {% endfor%}
+        </tbody>
+    </table>
+
+</body>
+</html>

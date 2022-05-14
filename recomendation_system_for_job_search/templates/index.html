@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>104職缺推薦系統頁面</title>
+</head>
+<style type="text/css">
+    body {background-image:url("http://127.0.0.1:5000/static/background.jpeg");
+          background-size:1920px 1080px;
+          background-attachment:scroll
+            }
+    
+</style>
+
+<body>
+    <h3>此推薦系統資料來源自<a href="https://www.104.com.tw/jobs/main/">104人力銀行</a>，預設搜尋關鍵字為"python"。請依下列指示輸入相關資料</h3>
+    <br>
+    <br>
+    <form action="/WebSite" method="GET"><!--注意:前端是打method，後端python要打method"s"-->
+        <p>step1.輸入地區(可選填北北基桃)</p>
+        <select name="areaCode">
+            <option>台北市</option>
+            <option>新北市</option>
+            <option>基隆市</option>
+            <option>桃園市</option>
+
+        </select>
+        <br>
+        <img src="http://127.0.0.1:5000/static/area.png">
+    <br>
+    <br>
+    <br>
+    <form action="/WebSite" method="GET"><!--注意:前端是打method，後端python要打method"s"-->
+    step2.希望搜尋幾頁的資料<input type="text" name="page"/> <br>
+    <h5>請留意:若頁面越多，資料處理時間越長，請耐心等候，謝謝</h5>
+    <br>
+    <br>
+    <br>
+    <button>取得資料</button>
+    </form>
+
+</body>
+</html>
