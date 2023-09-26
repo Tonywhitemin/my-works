@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta id="i18n_pagename" content="common"><!--！！！！！！！注意這行要有語系表i18n才可在專案中執行！！！！！！！！！！-->
+    <title class="i18n" name="Compete_mode_check"></title>
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/before_ML_check.css')}}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="static/js/compete_mode_check.js"></script>
+</head>
+<body>
+    <div>
+        <div class="reflect_body">
+        <div class="reflect_title i18n" title="Final Step Before Learning" name="Final_Step_Before_Learning">
+        </div>
+    </div>
+    <!--以下這段是執行機器學習時會跳出的進行中小視窗-->
+    <div class="parent">
+        <button class="btn btn-primary loading zoomIn animated" type="button" id="loading" disabled>
+            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+            Loading...
+        </button>
+    </div>
+    <!--中止線-->
+    <div class="summer_bargain">
+        <div class="summer_bargain_inner">
+          <span class="blue i18n" name="slogan_for_final_check"></span>
+          <strong class="blue i18n" name="mention_for_final_check"></strong>
+          <strong class="blue i18n" name="mention2_for_final_check"></strong>
+        </div>
+        <br><br>
+        <div class="parent">
+            <h4 class="i18n red" name="re-define-para" ></h4>
+        </div>
+        <div class="parent">
+            <button class="button">
+                <span class="button_inner">
+                    <a href="/machine_learining_mode_select" class="i18n" name="goto-re-define-para"></a>
+                </span>
+            </button>
+            
+        </div>
+    </div>
+    </div>
+
+    <div class="overall">
+        <table>
+            <tr>
+                <td class="head i18n" name="train-file-name"></td>
+                <td class="head i18n" name="Label-col"></td>
+                <td class="head i18n" name="super-or-unsuper"></td>
+                <td class="head i18n" name="task"></td>
+                <td class="head i18n" name="evaluate"></td>
+                <td class="head i18n" name="which-mode-selected"></td>
+                
+            </tr>
+            <tr>
+                <td class="sub_head">{{train_df_name}}</td>
+                {% if train_label=="尚未選擇標籤欄位" %}
+                    <td class="sub_head red">{{train_label}}</td>
+                {% else %}
+                    <td class="sub_head ">{{train_label}}</td>
+                {% endif %}
+                <td class="sub_head">{{super_or_unsuper}}</td>
+                <td class="sub_head">{{super_mission_type}}</td>
+                {% if super_regression_eva!="" %}
+                <td class="sub_head">{{super_regression_eva}}</td>
+                {% elif binary_class_eva!="" %}
+                <td class="sub_head">{{binary_class_eva}}</td>
+                {% elif multi_class_eva!="" %}
+                <td class="sub_head">{{multi_class_eva}}</td>
+                {% endif %}
+                <td class="sub_head">{{mode_select}}</td>
+            </tr>
+        </table>
+        <table>
+            <tr>
+                <td class="head i18n" name="algorithms-selected"></td>
+                <td class="head i18n" name="ensemble-yes-no"></td>
+                <td class="head i18n" name="stacking-yes-no"></td>
+                <td class="head i18n" name="train-vali-method"></td>
+                {% if vali_split!="" %}
+                <td class="head i18n" name="split-ratio-selected"></td>
+                {% endif %}
+                {% if vali_k_folds!="" %}
+                <td class="head i18n" name="cv-fold-num"></td>
+                {% endif %}
+                <td class="head i18n" name="GF-yes-no"></td>
+                <td class="head i18n" name="FS-yes-no"></td>
+                <td class="head i18n" name="tune-times"></td>
+                <td class="head i18n" name="top-model-to-tune"></td>
+            </tr>
+            <tr>
+                <td class="sub_head">
+                    {% for a in algorithms%}
+                        {{a}}<br>
+                    {% endfor %}
+                </td>
+                <td class="sub_head">{{train_ensemble}}</td>
+                <td class="sub_head">{{stack_models}}</td>
+                <td class="sub_head">{{validation_type}}</td>
+                {% if vali_split!="" %}
+                    <td class="sub_head">{{vali_split}}</td>
+                {% endif %}
+
+                {% if vali_k_folds!="" %}
+                <td class="sub_head">{{vali_k_folds}}</td>
+                {% endif %}
+                <td class="sub_head">{{Golden_Features}}</td>
+                <td class="sub_head">{{features_selection}}</td>
+                <td class="sub_head">{{start_random_models}}</td>
+                <td class="sub_head">{{hill_climbing_steps}}</td>
+            </tr>
+        </table>
+    </div>
+  
+    <!-- 以下這段是小賴協助製作一些小動畫內容-->
+    
+    <form action="MLJAR_connect_compete" method=post>
+        <div class="parent">
+            <button type="submit" class=" button" id="submit" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                <span class="button_inner i18n" name="start-ML">
+                </span>
+            </button>
+        </div>
+
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <h5 class="modal-title i18n" id="exampleModalLabel" name="on-going"></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body i18n" name="please-wait">
+                        
+                    </div>
+                    <div class="modal-footer">
+                    <button type="button" class="btn btn-primary ok i18n" id="ok" data-bs-dismiss="modal" name="confirm"></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    
+</body>
+<script src="static/i18n/jquery.js"></script><!--！！！！！！！注意這行要出現在body標籤下面語系表i18n才可生效！！！！！！！-->
+<script src="static/i18n/jquery.i18n.properties.js.js"></script><!--！！！！！！！注意這行要出現在body標籤下面語系表i18n才可生效！！！！！！！-->
+<script src="static/i18n/third-party-function.js"></script></script><!--！！！！！！！注意這行要出現在body標籤下面語系表i18n才可生效！！！！！！！-->
+</html>
+<!--
+super_or_unsuper
+super_mission_type
+mode_select
+super_regression_eva
+binary_class_eva
+multi_class_eva   
+algorithms
+train_ensemble
+stack_models
+validation_type
+vali_split
+vali_k_folds
+Golden_Features
+features_selection
+start_random_models
+hill_climbing_steps
+-->

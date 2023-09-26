@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta id="i18n_pagename" content="common"><!--！！！！！！！注意這行要有語系表i18n才可在專案中執行！！！！！！！！！！-->
+    <title class="i18n" name="upload_file_title"></title>
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/upload_file.css')}}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC&display=swap" rel="stylesheet">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="static/js/upload_file.js"></script>
+    
+</head>
+<body>
+    <div class="reflect_body">
+        <div class="reflect_title" title="Welcome to Integrated Auto Machine Learning Service">
+          <span class="i18n" name="hi_eng"></span>
+        </div>
+    </div>
+    <div class="summer_bargain">
+      <div class="summer_bargain_inner">
+        <span class="i18n next_line" name="hi"></span>
+        <strong class="i18n next_line" name="hint1"></strong>
+        <strong class="i18n next_line" name="hint2"></strong>
+      </div>
+    </div>
+
+    <form action="/reset" method=post  class="parent">
+      <button class="button" type=submit>
+          <span class="button_inner i18n" name="back"></span>
+      </button>  
+    </form>
+
+    <div class="parent">
+      <p class="error">{{ error_for_features_didnt_match }}</p>
+      <p class="error">{{ error_for_features_didnt_match_eng }}</p>
+    </div>
+
+    <form action="/current_file_check" class="align" method=post enctype=multipart/form-data accept-charset="UTF-8">
+      <div class="parent">
+        <div class="train_dataset_file">
+            <h2 class="i18n" name="Step1"></h2>
+            <h2 class="i18n" name="Step1-sub"></h2>
+            <input class="" type=file name=file-train>
+        </div>
+        <div class="test_dataset_file">
+            <h2 class="i18n" name="Step2"></h2>
+            <h2 class="i18n" name="Step2-sub"></h2>
+            <label class="yes"><input type="radio" name="yes_or_no_test_df" value="yes"><span class="i18n" name="yes"></span></label>
+            <label class="no"><input type="radio" name="yes_or_no_test_df" value="no" checked><span class="i18n" name="no"></span></label>
+            <br>
+            <span class="show_or_not" >
+              <span class="i18n next_line"  name="test_df_check"></span><br>
+              <span class="i18n next_line"  name="test_df_check-sub"></span><br>
+              <label class="no1"><input type="radio" name="test_df_num" value="1" checked><span class="i18n" name="1_file"></span></label>
+              <label class="no2"><input type="radio" name="test_df_num" value="2" ><span class="i18n" name="2_file"></span></label>
+              <label class="no3"><input type="radio" name="test_df_num" value="3" ><span class="i18n" name="3_file"></span></label>
+            </span>
+        </div>
+        <!--220905以下為測試上傳最多3個檔案-->
+        <div class="files_1">
+            <h2 class="i18n" name="upload_test_file"></h2>
+            <input type=file name=file-test-1>
+        </div>
+        <div class="files_2">
+            <h2 class="i18n" name="upload_test_file"></h2>
+            <input type=file name=file-test-2-1> 
+            <h2 class="i18n" name="upload_test_file2"></h2>
+            <input type=file name=file-test-2-2> 
+        </div>
+        <div class="files_3">
+            <h2 class="i18n" name="upload_test_file"></h2>
+            <input type=file name=file-test-3-1> 
+            <h2 class="i18n" name="upload_test_file2"></h2>
+            <input type=file name=file-test-3-2> 
+            <h2 class="i18n" name="upload_test_file3"></h2>
+            <input type=file name=file-test-3-3> 
+        </div>
+   
+      </div>
+      <div class="parent">
+        <button class="button" type=submit>
+            <span class="button_inner i18n" name="next">
+            </span>
+        </button>
+      </div>
+
+    </form>
+
+</body>
+<script src="static/i18n/jquery.js"></script><!--！！！！！！！注意這行要出現在body標籤下面語系表i18n才可生效！！！！！！！-->
+<script src="static/i18n/jquery.i18n.properties.js.js"></script><!--！！！！！！！注意這行要出現在body標籤下面語系表i18n才可生效！！！！！！！-->
+<script src="static/i18n/third-party-function.js"></script>></script><!--！！！！！！！注意這行要出現在body標籤下面語系表i18n才可生效！！！！！！！-->
+</html>

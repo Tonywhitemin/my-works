@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta id="i18n_pagename" content="common"><!--！！！！！！！注意這行要有語系表i18n才可在專案中執行！！！！！！！！！！-->
+    <title class="i18n" name="Results_After_AutoML_title"></title>
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/results_after_ML.css')}}">
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="static/js/page_after_Auto_ML.js"></script>
+
+</head>
+<body>
+    <div>
+        <div class="reflect_body">
+            <div class="reflect_title" title="Machine Learning Results and Download">
+                <span class="i18n" name="After_AutoML_Slogan"></span>
+            </div>
+        </div>
+    <div class="summer_bargain">
+        <div class="summer_bargain_inner">
+          <span class="blue next_line i18n" name="Results_After_AutoML_topic"></span>
+          <strong class="i18n" name="After_AutoML_mention"></strong>
+          <strong class="i18n" name="After_AutoML_mention2"></strong>
+          <strong class="i18n" name="After_AutoML_mention3"></strong>
+        </div>
+        
+    </div>
+    </div>
+        
+        <form action="/reset" method=post >
+        <div class="parent">
+            <h2 class="i18n" name="summary_preview"></h2>
+        </div>
+        <!--以下這裡開始是總表類型資料輸出-->
+        <div class="overall">
+            
+            <div class="part1">
+                <h3 class="open i18n" name="summary_eva_table"></h3>
+                <span class="click_it_1">
+                    <b class="open1 i18n" name="open_table"></b>
+                    <b class="close1 i18n" name="close_table"></b>
+                </span>
+            </div>
+            <div class="part2">
+                <h3 class="open i18n" name="summary_eva_boxplot"></h3>
+                <span class="click_it_2">
+                    <b class="open2 i18n" name="open_pic"></b>
+                    <b class="close2 i18n" name="close_pic"></b>
+                </span>
+            </div>
+            <div class="part3">
+                <h3 class="open i18n" name="summary_features_heatmap"></h3>
+                <span class="click_it_3">
+                    <b class="open3 i18n" name="open_pic"></b>
+                    <b class="close3 i18n" name="close_pic"></b>
+                </span>
+            </div>
+            <div class="part4">
+                <h3 class="open i18n" name="predicted_vs_real"></h3>
+                <span class="click_it_4">
+                    <b class="open4 i18n" name="open_pic"></b>
+                    <b class="close4 i18n" name="close_pic"></b>
+                </span>
+            </div>
+            <div class="part5">
+                <h3 class="open i18n" name="download_summary_files"></h3>
+                <span>
+                    <b><a href="/download_summary_files" class="i18n" name="click_to_download"></a></b>
+                </span>
+            </div>
+        </div>
+        <div class="overall">
+            <div class="part1 open_table">
+                <h3 class="i18n" name="leader_board"></h3>
+                <table class="des">
+                    <tr class="des">
+                        <th class="des i18n" name="leader_board_col1"></th>
+                        {% for n in name %} 
+                        <td class="des">{{n}}</td>
+                        {% endfor %} 
+                    </tr>
+                    <tr class="des">
+                        <th class="des i18n" name="leader_board_col2"></th>
+                        {% for mt in model_type %} 
+                        <td class="des">{{mt}}</td>
+                        {% endfor %} 
+                    </tr>
+                    <tr class="des">
+                        <th class="des i18n" name="leader_board_col3"></th>
+                        {% for m in metric_type %} 
+                        <td class="des">{{m}}</td>
+                        {% endfor %} 
+                    </tr>
+                    <tr class="des">
+                        <th class="des i18n" name="leader_board_col4"></th>
+                        {% for mv in metric_value %} 
+                        <td class="des">{{mv}}</td>
+                        {% endfor %} 
+                    </tr>
+                    <tr class="des">
+                        <th class="des i18n" name="leader_board_col5"></th>
+                        {% for tt in train_time %} 
+                        <td class="des">{{tt}}</td>
+                        {% endfor %} 
+                    </tr>
+                </table>
+            </div>
+            <div class="open_ldb_performance_boxplot">
+                <img class="pic" src={{ldb_performance_boxplot}}>
+            </div>
+            <div class="open_features_heatmap">
+                <img class="pic" src={{features_heatmap}}>
+            </div>
+            <div class="open_correlation_heatmap">
+                <img class="pic" src={{correlation_heatmap}}>
+            </div>
+        </div>
+        <!--以下這裡開始是最佳模型的資料輸出-->
+        <!--221004注意以下這段會依據使用者所選任務類型不同而會有不同畫面呈現-->
+        <div class="parent">
+            <h2 class="i18n" name="best_model_preview"></h2>
+        </div>
+        
+        <div class="overall">
+        <!--以下這段是回歸任務的內容-->
+            {% if super_mission_type=="regression" %}
+            
+            <div class="part1">
+                <h3 class="open i18n" name="best_model_permutation_importance"></h3>
+                <h3 class="open i18n" name="best_model_permutation_importance_eng"></h3>
+                <span class="click_it_5">
+                    <b class="open5 i18n" name="open_pic"></b>
+                    <b class="close5 i18n" name="close_pic"></b>
+                </span>
+            </div>
+            <div class="part1">
+                <h3 class="open i18n" name="best_model_predicted_vs_residuals"></h3>
+                <h3 class="open i18n" name="best_model_predicted_vs_residuals_eng"></h3>
+                <span class="click_it_7">
+                    <b class="open7 i18n" name="open_pic"></b>
+                    <b class="close7 i18n" name="close_pic"></b>
+                </span>
+            </div>
+            <div class="part1">
+                <h3 class="open i18n" name="best_model_true_vs_predicted"></h3>
+                <h3 class="open i18n" name="best_model_true_vs_predicted_eng"></h3>
+                <span class="click_it_8">
+                    <b class="open8 i18n" name="open_pic"></b>
+                    <b class="close8 i18n" name="close_pic"></b>
+                </span>
+            </div>
+            
+            {% else %}
+        <!--以下這段是二元分類任務與多元分類的內容-->
+            <div class="part1">
+                <h3 class="open i18n" name="best_model_confusion_matrix"></h3>
+                <h3 class="open i18n" name="best_model_confusion_matrix_eng"></h3>
+                <span class="click_it_5">
+                    <b class="open5 i18n" name="open_pic"></b>
+                    <b class="close5 i18n" name="close_pic"></b>
+                </span>
+            </div>
+            <div class="part1">
+                <h3 class="open i18n" name="best_model_permutation_importance"></h3>
+                <h3 class="open i18n" name="best_model_permutation_importance_eng"></h3>
+                <span class="click_it_7">
+                    <b class="open7 i18n" name="open_pic"></b>
+                    <b class="close7 i18n" name="close_pic"></b>
+                </span>
+            </div>
+            <div class="part1">
+                <h3 class="open i18n" name="best_model_AUROC"></h3>
+                <h3 class="open i18n" name="best_model_AUROC_eng"></h3>
+                <span class="click_it_8">
+                    <b class="open8 i18n" name="open_pic"></b>
+                    <b class="close8 i18n" name="close_pic"></b>
+                </span>
+            </div>
+            {% endif %}
+            <div class="part1">
+                <h3 class="open i18n" name="download_best_model"></h3>
+                <h3 class="open i18n" name="download_best_model_vali_df_proba"></h3>
+                <span>
+                    <b><a href={{validation_result}} class="i18n" name="click_to_download"></a></b>
+                </span>
+            </div>
+            <div class="part1">
+                <h3 class="open i18n" name="download_best_model"></h3>
+                <h3 class="open i18n" name="download_best_model_folder"></h3>
+                <span>
+                    <b><a href="/download_best_model" class="i18n" name="click_to_download"></a></b>
+                </span>
+            </div>
+        </div>
+        
+        <div class="overall">
+            <!--以下四張是最佳模型輸出資料預覽-->
+            <div class="open_pic1">
+                <img class="pic" src={{pic1}}>
+            </div>
+            <div class="open_pic3">
+                <img class="pic" src={{pic3}}>
+            </div>
+            <div class="open_pic4">
+                <img class="pic" src={{pic4}}>
+            </div>
+            
+        </div>
+        <!--221013增加若存在測試資料集時要顯示結果-->
+        {% if test_df_num!=0%}
+        <div class="parent">
+            <h2 class="i18n" name="test_df_predict_results"></h2>
+        </div>
+        {% endif %}
+        <div class="overall">
+        {% if test_df_num==3%}
+            <div class="part1">
+                <h3 class="open i18n" name="download_test_df_predict_propa"></h3>
+                <h3 class="open i18n" name="test_df_evaluate_result"></h3><h3>{{eval_metric}}：{{df_test_eval_metric}}</h3>
+                <span>
+                    <b><a href={{df_test_predictions_file}} class="i18n" name="click_to_download_proba"></a></b>
+                </span>
+            </div>
+            <div class="part1">
+                <h3 class="open i18n" name="download_test_df2_predict_propa"></h3>
+                <h3 class="open i18n" name="test_df_evaluate_result"></h3><h3>{{eval_metric}}：{{df_test2_eval_metric}}</h3>
+                <span>
+                    <b><a href={{df_test2_predictions_file}} class="i18n" name="click_to_download_proba"></a></b>
+                </span>
+            </div>
+            <div class="part1">
+                <h3 class="open i18n" name="download_test_df3_predict_propa"></h3>
+                <h3 class="open i18n" name="test_df_evaluate_result"></h3><h3>{{eval_metric}}：{{df_test3_eval_metric}}</h3>
+                <span>
+                    <b><a href={{df_test3_predictions_file}} class="i18n" name="click_to_download_proba"></a></b>
+                </span>
+            </div>
+            {% elif test_df_num==2%}
+            <div class="part1">
+                <h3 class="open i18n" name="download_test_df_predict_propa"></h3>
+                <h3 class="open i18n" name="test_df_evaluate_result"></h3><h3>{{eval_metric}}：{{df_test_eval_metric}}</h3>
+                <span>
+                    <b><a href={{df_test_predictions_file}} class="i18n" name="click_to_download_proba"></a></b>
+                </span>
+            </div>
+            <div class="part1">
+                <h3 class="open i18n" name="download_test_df2_predict_propa"></h3>
+                <h3 class="open i18n" name="test_df_evaluate_result"></h3><h3>{{eval_metric}}：{{df_test2_eval_metric}}</h3>
+                <span>
+                    <b><a href={{df_test2_predictions_file}} class="i18n" name="click_to_download_proba"></a></b>
+                </span>
+            </div>
+            {% elif test_df_num==1%}
+            <div class="part1">
+                <h3 class="open i18n" name="download_test_df_predict_propa"></h3>
+                <h3 class="open i18n" name="test_df_evaluate_result"></h3><h3>{{eval_metric}}：{{df_test_eval_metric}}</h3>
+                <span>
+                    <b><a href={{df_test_predictions_file}} class="i18n" name="click_to_download_proba"></a></b>
+                </span>
+            </div>
+            {% endif %}
+        </div>
+        <div class="parent">
+            <button class="button" type=submit>
+                <span class="button_inner i18n" name="end_service">
+                    
+                </span>
+            </button>
+        </div>
+    </form>
+
+</body>
+<script src="static/i18n/jquery.js"></script><!--！！！！！！！注意這行要出現在body標籤下面語系表i18n才可生效！！！！！！！-->
+<script src="static/i18n/jquery.i18n.properties.js.js"></script><!--！！！！！！！注意這行要出現在body標籤下面語系表i18n才可生效！！！！！！！-->
+<script src="static/i18n/third-party-function.js"></script></script><!--！！！！！！！注意這行要出現在body標籤下面語系表i18n才可生效！！！！！！！-->
+</html>

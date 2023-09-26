@@ -1,0 +1,303 @@
+/*＝＝＝＝＝＝＝以下為英文標題部份的CSS我是分隔線＝＝＝＝＝＝＝*/
+.reflect_body {
+    height: 80px;
+    position: relative;
+  }
+  
+.reflect_title {
+color: #c5f7fe;
+font-family: 'A1 Mincho', serif;
+font-size: 50px;
+left: 0;
+letter-spacing: -0.05em;
+line-height: 1;
+position: absolute;
+text-align: center;
+top: 0;
+width: 100%;
+-webkit-box-reflect: below 0 -webkit-gradient(linear, 0 0, 0 100%, from(transparent), color-stop(0.4, transparent), to(rgba(0,0,0,0.5)));
+}
+
+.reflect_title:before {
+color:#72d0df;
+content: attr(title);
+display: block;
+position: absolute;
+left: 0;
+text-align: center;
+top: 0;
+-webkit-mask-image:-webkit-linear-gradient(top, rgba(0,0,0,0), rgba(0,0,0,1));
+width: 100%;
+}
+/*＝＝＝＝＝＝＝我是分隔線＝＝＝＝＝＝＝*/
+/*＝＝＝＝＝＝＝以下為中文標題部份的CSS我是分隔線＝＝＝＝＝＝＝*/
+.summer_bargain {
+    margin: 0 auto;
+    width: 1200px;
+    }
+    
+    .summer_bargain_inner {
+    border-radius: 3px;
+    color: #37bcf2;
+    font-family:"Maru Folk Heavy", sans-serif;
+    font-size: 100px;
+    font-style: italic;
+    letter-spacing: 0;
+    line-height: 1.2;
+    padding: 3px 0;
+    text-shadow: 2px 2px 0 #fff, 5px 5px 0 #dfe8f1;
+    text-align: center;
+    }
+    
+    .summer_bargain_inner .green{
+    color: #06d9a5;
+    }
+    
+    .summer_bargain_inner strong {
+    margin-top: 20px;
+    display: block;
+    color: #FF8800;;
+    font-size: 24px;
+    font-family: "Maru Folk Medium", sans-serif;
+    letter-spacing: 2px;
+    text-shadow: 1px 1px 0 #fff, 1px 1px 0 #f1e3df;
+    }
+    /*＝＝＝＝＝＝＝我是分隔線＝＝＝＝＝＝＝*/
+
+img.mat {
+    margin-bottom: 50px;
+}
+
+div.overall {
+    display: flex;
+    justify-content: center; 
+    margin-bottom: 50px;
+    
+}
+div.part1,div.part2, div.part3,div.part4,div.part5 { 
+    max-height: 600px;
+    max-width: 2000px;
+    overflow-y: overlay;
+    display: auto;
+    align-items: center;
+    padding-left: 10px ;
+    padding-right: 10px;
+    padding-bottom: 10px;
+    margin-right: 10px;
+    margin-left: 10px;
+    margin-top: 40px;
+    margin-bottom: 40px;
+    box-shadow:3px 3px 12px orange;
+    line-height:20px;
+    text-align:center;
+    color: #fff;
+}
+
+
+
+h3.open {
+    word-break: break-all;
+    justify-content: center; 
+    align-items: center;
+    color: rgb(14, 11, 11);
+}
+
+label {
+    justify-content: center; 
+    align-items: center; 
+    display: flex;
+    color: rgb(14, 9, 9);
+}
+
+b{
+    background-color: #a3ea3f;
+    border: solid darkgreen;
+    color: rgb(235, 11, 59);
+    border-radius:10%;
+}
+
+
+h3.reset {
+    color: rgb(238, 20, 93);
+ }
+ 
+h2,h3{
+    color: rgb(14, 9, 9);
+}
+
+th.des{
+    display: block;
+    color: rgb(14, 9, 9);
+
+}
+
+tr.des{   
+    display: block;
+    color: rgb(14, 9, 9);
+    float: left;
+}
+
+
+td.des{
+    color: rgb(14, 9, 9);
+    word-break: break-all;
+    justify-content: center; 
+    align-items: center; 
+    width: 150px; 
+    height: 30px;
+    display: flex;
+    border: dotted orange;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    margin-right: 5px;
+    margin-left: 5px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    font-size: medium;
+}
+
+
+
+table.des{ 
+    margin-top: 30px;
+    margin-bottom: 30px;
+    justify-content: center; 
+    align-items: center;
+    display: flex;
+}
+
+
+body{
+    background-image: url(/static/pic/background.jpg);
+    border:2px #ccc solid;
+    background-color: whitesmoke;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
+  }
+
+
+/*＝＝＝＝＝＝＝以下為按鈕部份的CSS我是分隔線＝＝＝＝＝＝＝*/
+.button {
+    background: #5b9507 ;
+    background: -moz-linear-gradient(top, #a3ea3f, #5b9507);
+    background: -webkit-gradient(linear,
+      left top,
+      left bottom,
+      from(#a3ea3f),
+      to(#5b9507));
+    border: 1px solid #487606;
+    border-radius: 28px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3), inset 0 0 1px #fff;
+    color: #fff;
+    display: inline-block;
+    font-family: "Jun 501", sans-serif;
+    font-size: 26px;
+    height: 56px;
+    line-height: 56px;
+    overflow: hidden;
+    text-align: center;
+    text-decoration: none;
+    text-shadow: 0 -1px 1px #487606;
+    width: 200px;
+  }
+  
+.button_inner {
+display: block;
+height: 56px;
+line-height: 56px;
+opacity: 0.9;
+-moz-transition: all 0.2s ease-in-out;
+-ms-transition: all 0.2s ease-in-out;
+-webkit-transition: all 0.2s ease-in-out;
+transition: all 0.2s ease-in-out;
+}
+
+.button.hover .button_inner,
+.button:hover .button_inner{
+opacity: 1;
+-moz-transform: scale(1.1);
+-ms-transform: scale(1.1);
+-webkit-transform: scale(1.1);
+transform: scale(1.1);
+}
+
+/*＝＝＝＝＝＝＝我是分隔線＝＝＝＝＝＝＝*/
+
+input.code{
+    font-size:20px;
+    width: 130px;
+    height: 25px;
+
+}
+img.pic{
+    overflow-x: overlay;
+    display: Auto;
+    width: auto;
+}
+input{
+    width:20px;
+    height: 20px;
+}
+input.preprocessing{
+    width: 20px;
+    height: 20px;
+}
+
+div.err_show{
+    color: red;
+}
+
+/*以下是讓預覽處理過後的訓練資料集*/
+th{
+
+    color: rgb(14, 9, 9);
+
+}
+
+tr{   
+
+    color: rgb(14, 9, 9);
+
+}
+
+
+td{
+    color: rgb(14, 9, 9);
+    word-break: break-all;
+    justify-content: center; 
+    align-items: center; 
+    width: 100px; 
+    height: 30px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    margin-right: 5px;
+    margin-left: 5px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    font-size: medium;
+}
+
+
+
+table{ 
+    margin-top: 30px;
+    margin-bottom: 30px;
+    justify-content: center; 
+    align-items: center;
+    display: flex;
+}
+
+span.next_line{
+    word-break: keep-all;
+  }
+
+p.parent,div.parent,button.parent,form.parent,span.parent{
+    display: flex;
+    /* 水平置中 */
+    justify-content: center;    
+    /* 垂直置中 */
+    /*align-items: center;   */ 
+    }

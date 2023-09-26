@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta id="i18n_pagename" content="common"><!--！！！！！！！注意這行要有語系表i18n才可在專案中執行！！！！！！！！！！-->
+    <title class="i18n" name="result_check"></title>
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/dataset_current_info.css')}}">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="static/js/data_preprocessing_results_check.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/4.1.2/papaparse.js"></script>
+</head>
+<body>
+    <div>
+        <div class="reflect_body">
+            <div class="reflect_title i18n" title="Data Preprocessing Results Check" name="result_check"></div>
+        </div>
+    <div class="summer_bargain">
+        <div class="summer_bargain_inner">
+          <span class="blue i18n" name="slogan_for_data_check"></span>
+          <strong class="i18n" name="mention1_for_data_check"></strong>
+          <strong class="i18n" name="mention2_for_data_check"></strong>
+          <strong class="i18n" name="mention3_for_data_check"></strong>
+        </div>
+    </div>
+    <div class="parent">
+        <h3 class="reset i18n" name="restart"></h3>
+    </div>
+    <div class="parent">
+        <form action="/reset" method=post  class="parent">
+            <button class="button" type=submit>
+                <span class="button_inner i18n" name="back"></span>
+            </button>  
+        </form>
+    </div>
+    </div>
+        <!--<center><a href="/df_preview">點我預覽處理後的訓練資料集(前50行)</a></center>-->
+        
+        <form action="/machine_learining_mode_select" method=post >
+        
+        <div class="overall">
+            <div class="part1">
+                <h3 class="open i18n" name="numerocal_columns"></h3>
+                <h3 class="open i18n" name="pearsman"></h3>
+                <span class="click_it_1">
+                    <b class="open1 i18n" name="open_pic"></b>
+                    <b class="close1 i18n" name="close_pic"></b>
+                </span>
+                
+            </div>
+            <div class="part2">
+                <h3 class="open i18n" name="numerocal_columns"></h3>
+                <h3 class="open i18n" name="statistic"></h3>
+                <span class="click_it_2">
+                    <b class="open2 i18n" name="open_table"></b>
+                    <b class="close2 i18n" name="close_table"></b>
+                </span>
+            </div>
+            <div class="part3">
+                <h3 class="open i18n" name="cata_columns"></h3>
+                <h3 class="open i18n" name="pir_chart"></h3>
+                <span class="click_it_3">
+                    <b class="open3 i18n" name="open_pic"></b>
+                    <b class="close3 i18n" name="close_pic"></b>
+                </span>
+                
+            </div>
+            <div class="part4">
+                <h3 class="open i18n" name="preview_df"></h3>
+                <h3 class="open i18n" name="train_df_head"></h3>
+                <span class="click_it_4">
+                    <b class="open4 i18n" name="open_table"></b>
+                    <b class="close4 i18n" name="close_table"></b>
+                </span>
+            </div>
+            <div class="part5">
+                <h3 class="open i18n" name="download_df"></h3>
+                <h3 class="open i18n" name="train_and_test_df_after_preprocessing"></h3>
+                <span>
+                    <b><a href="/df_download" class="i18n" name="click_to_download"></a></b>
+                </span>
+            </div>
+
+        </div>
+        <div class="overall">
+            <div class="part1 open_pearsman">
+                {% if pearsman!="" %} 
+                    <img class="pearson" src={{pearsman}}>
+                {% else %}
+                    <h3 class="i18n" name="no_pearsman"></h3>
+                {% endif %}
+            </div>
+            <div class="part2 open_table">
+                {% if pearsman!="" %}
+                    <h3 class="i18n" name="sub_statistic"></h3>
+                    <table class="des">
+                        <tr class="des">
+                            <th class="des i18n" name="statistic_col1"></th>
+                            {% for c in column_name %} 
+                            <td class="des">{{c}}</td>
+                            {% endfor %} 
+                        </tr>
+                        <tr class="des">
+                            <th class="des i18n" name="statistic_col2"></th>
+                            {% for cv in count_value %} 
+                            <td class="des">{{cv}}</td>
+                            {% endfor %} 
+                        </tr>
+                        <tr class="des">
+                            <th class="des i18n" name="statistic_col3"></th>
+                            {% for m in mean_value %} 
+                            <td class="des">{{m}}</td>
+                            {% endfor %} 
+                        </tr>
+                        <tr class="des">
+                            <th class="des i18n" name="statistic_col4"></th>
+                            {% for s in std_value %} 
+                            <td class="des">{{s}}</td>
+                            {% endfor %} 
+                        </tr>
+                        <tr class="des">
+                            <th class="des i18n" name="statistic_col5"></th>
+                            {% for mv in min_value %} 
+                            <td class="des">{{mv}}</td>
+                            {% endfor %} 
+                        </tr>
+                        <tr class="des">
+                            <th class="des i18n" name="statistic_col6"></th>
+                            {% for d25 in df_top25 %} 
+                            <td class="des">{{d25}}</td>
+                            {% endfor %} 
+                        </tr>
+                        <tr class="des">
+                            <th class="des i18n" name="statistic_col7"></th>
+                            {% for d50 in df_top50 %} 
+                            <td class="des">{{d50}}</td>
+                            {% endfor %} 
+                        </tr>
+                        <tr class="des">
+                            <th class="des i18n" name="statistic_col8"></th>
+                            {% for d75 in df_top75 %} 
+                            <td class="des">{{d75}}</td>
+                            {% endfor %} 
+                        </tr>
+                        <tr class="des">
+                            <th class="des i18n" name="statistic_col9"></th>
+                            {% for max_v in max_value %} 
+                            <td class="des">{{max_v}}</td>
+                            {% endfor %} 
+                        </tr>
+                    </table>
+                {% else %}
+                    <h3 class="i18n" name="no_numerical"></h3>
+                {% endif %}
+            </div>
+
+            <div class="open_pie">
+                {% if pie!="" %} 
+                    <img class="pie" src={{pie}}>
+                {% else %}
+                    <h3 class="i18n" name="no_pie"></h3>
+                {% endif %}
+
+            </div>
+            <div class="df_head part4">
+                <h3 class="i18n" name="sub_preview"></h3>
+                <h3 class="i18n" name="train_df_head"></h3>
+
+            </div>
+        </div>
+
+    </div>
+    
+    
+    </div>
+    <div class="parent">
+        <button class="button" type=submit>
+            <span class="button_inner i18n" name="check_ok"></span>
+        </button>
+    </div>
+    </form>
+
+</body>
+<script src="static/i18n/jquery.js"></script><!--！！！！！！！注意這行要出現在body標籤下面語系表i18n才可生效！！！！！！！-->
+<script src="static/i18n/jquery.i18n.properties.js.js"></script><!--！！！！！！！注意這行要出現在body標籤下面語系表i18n才可生效！！！！！！！-->
+<script src="static/i18n/third-party-function.js"></script></script><!--！！！！！！！注意這行要出現在body標籤下面語系表i18n才可生效！！！！！！！-->
+</html>
+<!--
+               
+-->

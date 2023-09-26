@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta id="i18n_pagename" content="common"><!--！！！！！！！注意這行要有語系表i18n才可在專案中執行！！！！！！！！！！-->
+    <title class="i18n" name="current_file_info_title"></title>
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/dataset_current_info.css')}}">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="static/js/dataset_current_info.js"></script>
+    
+</head>
+<!--<body onload="CheckAlert()"> 230620先遮住不確定有無影響-->
+<body>
+    
+    <div>
+        <div class="reflect_body">
+            <div class="reflect_title" title="Data Preprocessing">
+                <span class="i18n" name="page_topic"></span>
+            </div>
+        </div>
+        <div class="summer_bargain">
+            <div class="summer_bargain_inner">
+                <span class="blue i18n"  name="train_info"></span>
+                <strong class="i18n"  name="check_property"></strong>
+                <strong class="i18n"  name="check-1"></strong>
+                <strong class="i18n"  name="check-2"></strong>
+                <strong class="i18n"  name="check-3"></strong>
+            </div>
+        </div>
+        <div class="parent">
+            <h3 class="reset i18n" name="to_reset"></h3>
+        </div>
+        <div class="parent">
+            <form action="/reset" method=post  class="parent">
+                <button class="button" type=submit>
+                    <span class="button_inner i18n" name="back"></span>
+                </button>  
+            </form>
+        </div>
+        <div class="err_show parent">
+            {% for i in train_error_list%}
+            {{i}}<br>
+            {% endfor %}
+
+            {% for j in test1_error_list%}
+            {{j}}<br>
+            {% endfor %}
+
+            {% for k in test2_error_list%}
+            {{k}}<br>
+            {% endfor %}
+
+            {% for ll in test3_error_list%}
+            {{ll}}<br>
+            {% endfor %}
+        </div>
+        
+        <form action="/df_para_modify" method=post >
+            <div class="overall">
+                <div class="part1">
+                        <span>
+                        <table class="des">
+                            <tr class="des">
+                                <th class="des"><span class="i18n next_line" name="train-df"></span></th>
+                                <th class="des"><span class="i18n next_line" name="nowcolumns"></span></th>
+                                {% for l in l1 %} 
+                                <td class="des">
+                                {{l}}
+                                </td>
+                                {% endfor %} 
+                            </tr>
+                            <tr class="des">
+                                <th class="des i18n" name="define_property"></th>
+                                <th class="des i18n" name="check_if_need"></th>
+                                {% for j in j1 %} 
+                                <td class="des">
+                                <select name="dtype">    
+                                    <option value={{j}} selected>{{j}}</option>
+                                    <option value="整數(int)" class="i18n" name="int"></option>
+                                    <option value="浮點數(float)" class="i18n" name="float"></option>
+                                    <option value="字串(str)" class="i18n" name="str"></option>
+                                    <option value="無序類別(Nominal_category)" class="i18n" name="Nominal_cata"></option>
+                                    <option value="有序類別(Ordinal_category)" class="i18n" name="Ordinal_cata"></option>
+
+                                </select>
+                                </td>
+                                {% endfor %}
+                            </tr>
+                            
+                            <tr class="des">
+                                <th class="des i18n" name="missing_value_code"></th>
+                                <th class="des i18n" name="please_fill"></th>
+                                {% for l in l1 %} 
+                                <td class="des"><input class="code" type=text name="missing_code" value="請輸入代號"></td>
+                                {% endfor %} 
+                            </tr>
+                            <tr class="des">
+                                <th class="des i18n" name="label_col"></th>
+                                <th class="des i18n" name="please_choose"></th>
+                                {% for l in l1 %} 
+                                <td class="des"><label class="1_1"><input type="radio" name="label_column" value="{{l}}"></label></td>
+                                {% endfor %} 
+                            </tr>
+                        </table>
+                        </span>
+                </div>
+
+            </div>
+
+    </div>
+    <div class="parent">
+            <button class="button" type=submit>
+                <span class="button_inner i18n" name="next" onclick="confirmEvent()">
+                </span>
+            </button>
+        </form>
+    </div>
+    <!---->
+    
+    
+</body>
+<script src="static/i18n/jquery.js"></script><!--！！！！！！！注意這行要出現在body標籤下面語系表i18n才可生效！！！！！！！-->
+<script src="static/i18n/jquery.i18n.properties.js.js"></script><!--！！！！！！！注意這行要出現在body標籤下面語系表i18n才可生效！！！！！！！-->
+<script src="static/i18n/third-party-function.js"></script></script><!--！！！！！！！注意這行要出現在body標籤下面語系表i18n才可生效！！！！！！！-->
+</html>
+<!--
+               
+-->

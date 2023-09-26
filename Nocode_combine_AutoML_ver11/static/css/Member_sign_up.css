@@ -1,0 +1,62 @@
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background-color: #f2f2f2;
+    font-family: Arial, sans-serif;
+  }
+h1 {
+  text-align: center;
+  color: #333;
+  margin-top: 0;
+}
+
+form {
+  width: 800px;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+label {
+  display: block;
+  margin-bottom: 10px;
+  color: #666;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="email"] {
+  width: 97%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  font-size: 14px;
+}
+
+input[type="submit"] {
+  width: 100%;
+  padding: 10px;
+  background-color: #007bff;
+  border: none;
+  border-radius: 3px;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+input[type="submit"]:hover {
+  background-color: #0056b3;
+}
+
+/* Optional: Add some spacing between form elements */
+form > * {
+  margin-bottom: 10px;
+}
+
+p.err{
+  color: red;
+}

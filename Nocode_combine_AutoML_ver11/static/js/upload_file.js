@@ -1,0 +1,48 @@
+
+$(document).ready(function(){
+    $("span.show_or_not").hide();
+});
+$(document).ready(function(){
+    $("label.yes").click(function(){
+    $("span.show_or_not").show();
+    $("div.files_1").show();
+    });
+});
+$(document).ready(function(){
+    $("label.no").click(function(){
+    $("span.show_or_not").hide();
+    $("div.files_1").hide();
+    $("div.files_2").hide();
+    $("div.files_3").hide();
+    });
+});       
+$(document).ready(function(){
+    $("div.files_1").hide();
+});
+$(document).ready(function(){
+    $("div.files_2").hide();
+});
+$(document).ready(function(){
+    $("div.files_3").hide();
+});
+$(document).ready(function(){
+    $("label.no1").click(function(){
+    $("div.files_1").show();
+    $("div.files_2").hide();
+    $("div.files_3").hide();
+    });
+});
+$(document).ready(function(){
+    $("label.no2").click(function(){
+    $("div.files_2").show();
+    $("div.files_3").hide();
+    $("div.files_1").hide();
+    });
+});
+$(document).ready(function(){
+    $("label.no3").click(function(){
+    $("div.files_3").show();
+    $("div.files_1").hide();
+    $("div.files_2").hide();
+    });
+});

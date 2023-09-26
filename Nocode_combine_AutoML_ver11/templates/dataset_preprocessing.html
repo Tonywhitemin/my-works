@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta id="i18n_pagename" content="common"><!--！！！！！！！注意這行要有語系表i18n才可在專案中執行！！！！！！！！！！-->
+    <title class="i18n" name="Data_preprocessing_title"></title>
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/dataset_current_info.css')}}">
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="static/js/dataset_preprocessing.js"></script>
+</head>
+<body>
+    <div>
+        <div class="reflect_body">
+        <div class="reflect_title" title="Data Preprocessing">
+          <span class="i18n" name="page_topic"></span>
+        </div>
+    </div>
+    <div class="summer_bargain">
+        <div class="summer_bargain_inner">
+          <span class="blue i18n" name="slogan"></span>
+          <strong class="i18n" name="check_property"></strong>
+          <strong class="i18n" name="mention-0"></strong>
+          <strong class="i18n" name="mention-1"></strong>
+          <strong class="i18n" name="mention-2"></strong>
+          <strong class="i18n" name="mention-3"></strong>
+          <strong class="i18n" name="mention-4"></strong>
+          <strong class="i18n" name="mention-5"></strong>
+          <strong class="i18n" name="remark"></strong>
+        </div>
+    </div>
+    
+    </div>  
+    <form action="/handle_preprocessing" method=post >
+        <!--221108新增三個按鈕以便讓表格展開-->
+        <div class="overall">
+            <span class="click_toggle_numerical">
+                <input class="numerical" id="numerical" type="radio" name="numerical" style="display:none"/>
+                <label class="numerical i18n" for="numerical" name="numerical_check"></label>
+                <label class="numerical_table_closed i18n" for="numerical" name="close_table"></label>
+            </span>
+            <span class="click_toggle_ordinal">
+                <input class="ordinal" id="ordinal" type="radio" name="ordinal" style="display:none"/>
+                <label class="ordinal i18n" for="ordinal" name="ordinal_check"></label>
+                <label class="ordinal_table_closed i18n" for="ordinal" name="close_table"></label>
+            </span>
+            <span class="click_toggle_nominal">
+                <input class="nominal" id="nominal" type="radio" name="nominal" style="display:none"/>
+                <label class="nominal i18n" for="nominal" name="nominal_check"></label>
+                <label class="nominal_table_closed i18n" for="nominal" name="close_table"></label>
+            </span>
+        </div>
+        
+        <div class="overall">
+            <!--數值欄位-->
+            <div class="part1 numerical_check">
+                    <span>
+                    <h3 class="open i18n" name="numerical_column_info"></h3>
+                    <table class="des">
+                        <tr class="des">
+                            <th class="des i18n" name="column_name"></th>
+                            <th class="des i18n" name="as_following"></th>
+                            {% for l in df_numerical_features_list %} 
+                            <td class="des"><label class="1_1">{{l}}</label></td>
+                            {% endfor %} 
+                        </tr>
+                        <tr class="des">
+                            <th class="des i18n" name="property"></th>
+                            <th class="des i18n" name="from_last_page"></th>
+                            {% for j in property_of_df_numerical %} 
+                            <td class="des">
+                            {{j}}
+                            </td>
+                            {% endfor %}
+                        </tr>
+                        <tr class="des">
+                            <th class="des i18n" name="current_column"></th>
+                            <th class="des i18n" name="missing_rate"></th>
+                            {% for m in df_numerical_missing_rate %} 
+                            <td class="smaller">
+                            {{m}}
+                            </td>
+                            {% endfor %} 
+                        </tr>
+                        <tr class="des">
+                            <th class="des i18n" name="check_if_drop_col"></th>
+                            <th class="des i18n" name="drop_col"></th>
+                            {% for m in numerical_drop_col_then_disable %} 
+                            <td class="smaller">
+                                <select name="numerical_drop_col" id={{m}}>    
+                                    <option value="yes" class="i18n" name="yes1"></option>
+                                    <option value="no" class="i18n" name="no1" selected></option>
+                                </select>
+                            </td>
+                            {% endfor %} 
+                        </tr>
+                        <tr class="des">
+                            <th class="des i18n" name="outlier"></th>
+                            <th class="des i18n" name="replace_to_na"></th>
+                            {% for m in numerical_drop_col_then_disable_outlier %} 
+                            <td class="smaller">
+                                <select name="numerical_outlier" class={{m}}>    
+                                    <option value="yes" class="i18n" name="yes1" selected></option>
+                                    <option value="no" class="i18n" name="no1" ></option>
+                                </select>
+                            </td>
+                            {% endfor %} 
+                        </tr>
+                        <tr class="des">
+                            <th class="des i18n" name="check_if_dropna"></th>
+                            <th class="des i18n" name="yes_or_no"></th>
+                            {% for l in numericalidname %}
+                            <td class="smaller">
+                                <select name="numerical_dropna" id={{l}}>    
+                                    <option value="yes" class="i18n" name="yes1"></option>
+                                    <option value="no" class="i18n" name="no1" selected></option>
+                                </select>
+                            </td>
+                            {% endfor %} 
+                        </tr>
+                        <tr class="des">
+                            <th class="des i18n" name="fill_na_with"></th>
+                            <th class="des i18n" name="fill_method"></th>
+                            {% for l in numerical_disableid %}
+                            <td class="smaller">
+                                <select name="numerical_fill_na" id={{l}}>    
+                                    <option value="mean" class="i18n" name="mean"></option>
+                                    <option value="median" class="i18n" name="median" selected></option>
+                                </select>
+                            </td>
+                            {% endfor %} 
+                        </tr>
+                        <tr class="des">
+                            <th class="des i18n" name="normalization_or_not"></th>
+                            <th class="des i18n" name="normalization"></th>
+                            {% for m in numerical_drop_col_then_disable_normalization %} 
+                            <td class="des">
+                                <select name="numerical_normalization" class={{m}}>    
+                                    <option value="no" class="i18n" name="no1" ></option>
+                                    <option value="min_max" class="i18n" name="min_max" selected></option>
+                                    <option value="StandardScaler" class="i18n" name="StandardScaler" ></option>
+                                </select>
+                            </td>
+                            {% endfor %} 
+                        </tr>
+                    </table>
+                    </span>
+            </div>
+
+            <!--有序欄位-->
+
+            <div class="part1 ordinal_check">
+                <span>
+                <h3 class="open i18n" name="ordinal_column_info"></h3>
+                <table class="des">
+                    <tr class="des">
+                        <th class="des i18n" name="column_name"></th>
+                        <th class="des i18n" name="as_following"></th>
+                        {% for l in df_ordinal_features_list %} 
+                        <td class="des"><label class="1_1">{{l}}</label></td>
+                        {% endfor %} 
+                    </tr>
+                    <tr class="des">
+                        <th class="des i18n" name="property"></th>
+                        <th class="des i18n" name="from_last_page"></th>
+                        {% for j in property_of_df_ordinal %} 
+                        <td class="des">
+                        {{j}}
+                        </td>
+                        {% endfor %}
+                    </tr>
+                    <tr class="des">
+                        <th class="des i18n" name="current_column"></th>
+                        <th class="des i18n" name="missing_rate"></th>
+                        {% for m in df_ordinal_missing_rate %} 
+                        <td class="smaller">
+                        {{m}}
+                        </td>
+                        {% endfor %} 
+                    </tr>
+                    <tr class="des">
+                        <th class="des i18n" name="check_if_drop_col"></th>
+                        <th class="des i18n" name="drop_col"></th>
+                        {% for l in ordinal_drop_col_then_disable %} 
+                        <td class="smaller">
+                            <select name="ordinal_drop_col" id={{l}}>    
+                                <option value="yes" class="i18n" name="yes1"></option>
+                                <option value="no" class="i18n" name="no1" selected></option>
+                            </select>
+                        </td>
+                        {% endfor %} 
+                    </tr>
+                    <tr class="des">
+                        <th class="des i18n" name="check_if_dropna"></th>
+                        <th class="des i18n" name="yes_or_no"></th>
+                        {% for l in ordinalidname %} 
+                        <td class="smaller">
+                            <select name="ordinal_dropna" id={{l}}>    
+                                <option value="yes" class="i18n" name="yes1"></option>
+                                <option value="no" class="i18n" name="no1" selected></option>
+                            </select>
+                        </td>
+                        {% endfor %} 
+                    </tr>
+                    <tr class="des">
+                        <th class="des i18n" name="fill_na_with"></th>
+                        <th class="des i18n" name="fill_method"></th>
+                        {% for l in ordinal_disableid %}
+                        <td class="des">
+                            <select name="ordinal_fill_na" id={{l}}>    
+                                <option value="mode" class="i18n" name="mode" selected></option>
+                                <option value="unknown" class="i18n" name="Unknown" ></option>
+                            </select>
+                        </td>
+                        {% endfor %} 
+                    </tr>
+                    <tr class="des">
+                        <th class="des i18n" name="Ordinal_handle"></th>
+                        <th class="des i18n" name="which_method"></th>
+                        {% for m in ord_handle %} 
+                        <td class="max">
+                            <!--221110為了下拉式選單要對應讓自定義label encoding表格出來而調整，參考網址:https://social.msdn.microsoft.com/Forums/zh-TW/2030bd82-3acd-4a41-bb5c-eb388f03c0a8/select-1997925289243353698421934?forum=236-->
+
+                            <select name="ordinal_translate" class="ordinal_translate" id={{m}}>    
+                                <option value="#tab_1" class="i18n" name="self_define_label_encoding"></option>
+                                <option value="#tab_2" class="i18n" name="auto_label_encoding" selected></option>
+                                <option value="#tab_3" class="i18n" name="one_hot"></option>
+                            </select>
+                        </td>
+                        {% endfor %} 
+                    </tr>
+                </table>
+                </span>
+            </div>
+
+            <!--無序欄位-->
+
+            <div class="part1 nominal_check">
+                <span>
+                <h3 class="open i18n" name="nominal_column_info"></h3>
+                <table class="des">
+                    <tr class="des">
+                        <th class="des i18n" name="column_name"></th>
+                        <th class="des i18n" name="as_following"></th>
+                        {% for l in df_nominal_features_list %} 
+                        <td class="des"><label class="1_1">{{l}}</label></td>
+                        {% endfor %} 
+                    </tr>
+                    <tr class="des">
+                        <th class="des i18n" name="property"></th>
+                        <th class="des i18n" name="from_last_page"></th>
+                        {% for j in property_of_df_nominal %} 
+                        <td class="des">
+                        {{j}}
+                        </td>
+                        {% endfor %}
+                    </tr>
+                    <tr class="des">
+                        <th class="des i18n" name="current_column"></th>
+                        <th class="des i18n" name="missing_rate"></th>
+                        {% for m in df_nominal_missing_rate %} 
+                        <td class="smaller">
+                        {{m}}
+                        </td>
+                        {% endfor %} 
+                    </tr>
+                    <tr class="des">
+                        <th class="des i18n" name="check_if_drop_col"></th>
+                        <th class="des i18n" name="drop_col"></th>
+                        {% for l in nominal_drop_col_then_disable %} 
+                        <td class="smaller">
+                            <select name="nominal_drop_col" id={{l}}>    
+                                <option value="yes" class="i18n" name="yes1"></option>
+                                <option value="no" class="i18n" name="no1" selected></option>
+                            </select>
+                        </td>
+                        {% endfor %} 
+                    </tr>
+                    <tr class="des">
+                        <th class="des i18n" name="check_if_dropna"></th>
+                        <th class="des i18n" name="yes_or_no"></th>
+                        {% for l in nominalidname %}
+                        <td class="smaller">
+                            <select name="nominal_dropna" id={{l}}>    
+                                <option value="yes" class="i18n" name="yes1"></option>
+                                <option value="no" class="i18n" name="no1" selected></option>
+                            </select>
+                        </td>
+                        {% endfor %} 
+                    </tr>
+                    <tr class="des">
+                        <th class="des i18n" name="fill_na_with"></th>
+                        <th class="des i18n" name="fill_method"></th>
+                        {% for l in nominal_disableid %}
+                        <td class="des">
+                            <select name="nominal_fill_na" id={{l}}>    
+                                <option value="mode" class="i18n" name="mode" selected></option>
+                                <option value="unknown" class="i18n" name="Unknown" ></option>
+                            </select>
+                        </td>
+                        {% endfor %} 
+                    </tr>
+                </table>
+                </span>
+            </div>
+        <!--以下這段是221024增加要顯示有序欄位但使用者決定用label encoding時讓使用者定義代碼用-->
+
+        <div class="part1" id="tab_1">
+            <span>
+            <h3 class="i18n" name="set_new_code_area"></h3><h3 class="red i18n" name="set_new_code_area_mention"></h3>
+            <table class="des">
+                <tr class="des">
+                    <th class="des"><span class="i18n next_line" name="ordinal_col"></span></th>
+                    <th class="des"><span class="i18n next_line" name="ordinal_col_name"></span></th>
+                    {% for nc in ordinal_col %} 
+                    <td class="smaller">
+                    {{nc}}
+                    </td>
+                    {% endfor %} 
+                </tr>
+                <tr class="des">
+                    <th class="des"><span class="i18n next_line" name="ordinal_option"></span></th>
+                    <th class="des"><span class="i18n next_line" name="ordinal_option_name"></span></th>
+                    {% for no in ordinal_option %} 
+                    <td class="smaller">
+                    {{no}}
+                    </td>
+                    {% endfor %} 
+                </tr>
+                <tr class="des">
+                    <th class="des i18n" name="fill_in_code_for_ordinal"></th>
+                    <th class="des i18n" name="set_new_code"></th>
+                    {% for nc in ordinal_col %} 
+                    <td class="des"><input class="code" type="number" name="set_new_ordinal_label_code" required="required" value="123"></td>
+                    {% endfor %} 
+                </tr>
+            </table>
+            </span>
+        </div>
+
+    <!--221110以下這兩個是dummy區域不要刪除-->
+
+    </div>
+    <div id="tab_2">
+    </div>
+    <div id="tab_3">
+    </div>
+
+      
+        <div class="parent">
+            <button class="button" type=submit>
+                    <span class="button_inner i18n" name="start_preprocessing">
+                        
+                    </span>
+            </button>
+        </div>
+    </form>
+
+
+</body>
+<script src="static/i18n/jquery.js"></script><!--！！！！！！！注意這行要出現在body標籤下面語系表i18n才可生效！！！！！！！-->
+<script src="static/i18n/jquery.i18n.properties.js.js"></script><!--！！！！！！！注意這行要出現在body標籤下面語系表i18n才可生效！！！！！！！-->
+<script src="static/i18n/third-party-function.js"></script>></script><!--！！！！！！！注意這行要出現在body標籤下面語系表i18n才可生效！！！！！！！-->
+</html>

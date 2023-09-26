@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta id="i18n_pagename" content="common"><!--！！！！！！！注意這行要有語系表i18n才可在專案中執行！！！！！！！！！！-->
+    <title class="i18n" name="homepage_title"></title>
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/homepage.css')}}">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    
+</head>
+<body>
+    <div class="space"></div>
+    <div class="reflect_body">
+        <div class="reflect_title" title="Welcome to Integrated Auto Machine Learning Service">
+          <span class="i18n" name="hi_eng"></span>
+        </div>
+    </div>
+ 
+    <div class="summer_bargain">
+      <div class="summer_bargain_inner">
+        <span class="i18n next_line" name="hi"></span>
+        <strong class="i18n" name="input_file_name"></strong>
+      </div>
+    </div>
+    <div class="version i18n" name="version"></div>
+    <div class="parent">
+      {% if error %}
+        <p class="error">{{ error }}</p><br>
+      {% endif %}
+    </div>
+    <div class="parent">
+      {% if error2 %}
+        <p class="error">{{ error2 }}</p>
+      {% endif %}
+    </div>
+  
+       
+        <form action="/create_folder" method=post enctype=multipart/form-data>
+          <div class="parent">
+            <input class="folder_name" type=text name=folder_name placeholder="請輸入本次專案資料夾名稱"><br>
+          </div>
+          <div class="parent">
+            <button class="button parent" type=submit>
+              <span class="button_inner i18n" name="next"></span>
+            </button>
+          </div>
+          
+        </form>
+  
+</body>
+<script src="static/i18n/jquery.js"></script><!--！！！！！！！注意這行要出現在body標籤下面語系表i18n才可生效！！！！！！！-->
+<script src="static/i18n/jquery.i18n.properties.js.js"></script><!--！！！！！！！注意這行要出現在body標籤下面語系表i18n才可生效！！！！！！！-->
+<script src="static/i18n/third-party-function.js"></script></script><!--！！！！！！！注意這行要出現在body標籤下面語系表i18n才可生效！！！！！！！-->
+</html>

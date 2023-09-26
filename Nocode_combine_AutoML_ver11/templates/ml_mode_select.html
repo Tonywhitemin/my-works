@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/machine_learning_mode select.css')}}">
+    <meta id="i18n_pagename" content="common"><!--！！！！！！！注意這行要有語系表i18n才可在專案中執行！！！！！！！！！！-->
+    <title class="i18n" name="ML_mode_select"></title>
+    <script src="//apps.bdimg.com/libs/jqueryui/1.10.4/jquery-ui.min.js"></script><!--220920網路上加的-->
+    <link rel="stylesheet" href="jqueryui/style.css"><!--220920網路上加的-->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="static/js/ml_mode_select.js"></script>
+</head>
+<body>
+    <div>
+        <div class="reflect_body">
+            <div class="reflect_title i18n" title="Machine Learning Mode Select" name="ML_mode_select"></div>
+        </div>
+    <div class="summer_bargain">
+        <div class="summer_bargain_inner">
+            <span class="blue i18n" name="ML_mode"></span>
+            <strong class="i18n" name="mention_for_ML_para_selec"></strong>
+            <strong class="i18n" name="mention2_for_ML_para_selec"></strong>
+        </div>
+    
+    </div>
+    </div>
+       
+    <form action="/ML_para_accept" method=post >
+        <div class="parent">
+            <h2 class="i18n" name="step1"></h2>
+        </div>
+            <div class="overall">
+                <div class="super_or_unsuper">
+                    <input class="super" id="super" type="radio" name="super_or_unsuper" value="監督式學習" checked style="display:none"/>
+                    <label class="super i18n" for="super" name="super"></label>
+                    <img class="super" src="/static/pic/supervised.jpg">
+                </div>
+                <div class="super_or_unsuper">
+                    <input class="unsuper" id="unsuper" type="radio" name="super_or_unsuper" value="非監督式學習" style="display:none"/>
+                    <label class="unsuper i18n" for="unsuper" name="unsuper"></label>
+                    <img class="unsuper" src="/static/pic/on_going.jpg">
+                </div>    
+            </div>
+        </div>
+        <div class="overall">
+            <div class="super_mission_type">
+                <div class="parent">
+                    <h3 class="i18n" name="step2"></h3>
+                </div>
+                <br><br>
+                {% if label_set_check>2 %}
+                    <label><input class="regression" type="radio" name="super_mission_type" value="regression" checked><span class="i18n" name="reg"></span></label>   
+                    <label><input class="multi" type="radio" name="super_mission_type" value="multiclass_classification" ><span class="i18n" name="multi"></span></label>
+                {% elif label_set_check==2%}
+                    <label><input class="regression" type="radio" name="super_mission_type" value="regression" checked><span class="i18n" name="reg"></span></label>    
+                    <label><input class="binary" type="radio" name="super_mission_type" value="binary_classification" ><span class="i18n" name="binary"></span></label>
+                {% endif %} 
+            </div>
+            <div class="super_regression_eva">
+                <div class="parent">
+                    <h3 class="i18n" name="step3"></h3>
+                </div>
+                <br><br>
+                <label title=" (Root Mean Squared Error)"><input class="super_regression_eva" type="radio" name="super_regression_eva" value="rmse"><span class="i18n" name="RMSE"></span></label>  
+                <label title=" (Mean Squared Error)"><input class="super_regression_eva" type="radio" name="super_regression_eva" value="mse" checked><span class="i18n" name="MSE"></span></label>   
+                <label title=" (Mean Absolute Error)"><input class="super_regression_eva" type="radio" name="super_regression_eva" value="mae"><span class="i18n" name="MAE"></span></label>
+                <label title=" (R Squared)"><input class="super_regression_eva" type="radio" name="super_regression_eva" value="r2"><span class="i18n" name="R2"></span></label>  
+            </div>
+            <div class="binary_class_eva">
+                <div class="parent">
+                    <h3 class="i18n" name="step3_1"></h3>
+                </div>
+                <br><br>
+                <label><input class="binary_class_eva" type="radio" name="binary_class_eva" value="logloss"><span class="i18n" name="Logloss"></span></label>   
+                <label title="(Area Under Receiver operating characteristic)"><input class="binary_class_eva" type="radio" name="binary_class_eva" value="auc" checked ><span class="i18n" name="AUROC"></span></label>   
+                <label><input class="binary_class_eva" type="radio" name="binary_class_eva" value="f1"><span class="i18n" name="F1-Score"></span></label>   
+                <label><input class="binary_class_eva" type="radio" name="binary_class_eva" value="accuracy"><span class="i18n" name="Accuracy"></span></label>
+            </div>
+            <div class="multi_class_eva">
+                <div class="parent">
+                    <h3 class="i18n" name="step3_2"></h3>
+                </div>
+                <br><br>
+                <label><input class="multi_class_eva" type="radio" name="multi_class_eva" value="logloss" checked><span class="i18n" name="Logloss"></span></label>  
+                <label><input class="multi_class_eva" type="radio" name="multi_class_eva" value="f1"><span class="i18n" name="F1-Score"></span></label>   
+                <label><input class="multi_class_eva" type="radio" name="multi_class_eva" value="accuracy"><span class="i18n" name="Accuracy"></span></label>
+            </div>
+            <div class="mode_select">
+                <div class="parent">
+                    <h3 class="i18n" name="step4"></h3>
+                </div>
+                <h4 class="i18n but" name="introduce" onclick="mode()"></h4>
+                <!--220930以下是測試彈出說明內容-->
+                <div id="mode">
+                    <div id="window-pop">
+                        <div class="window-content">
+                            <span class="intro i18n" name="window_intro"></span>
+                            <span class="intro i18n" name="explain_selected"></span>
+                            <span class="intro i18n" name="compete_selected"></span>
+                            <div class="parent">
+                                <span class="intro i18n" name="click_space_area_to_back"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--以上是測試彈出說明內容-->
+                <div class="parent">
+                    <input type="radio" class="explain" id="exp"  name="mode_select" value="快速模式" checked style="display:none"/>
+                    <label for="exp" class="explain i18n" name="explain"></label>  
+                    <input type="radio" class="compete"  id="comp"  name="mode_select" value="自定義模式" style="display:none"/>
+                    <label for="comp" class="compete i18n" name="compete"></label>
+                </div>
+            </div>
+            
+        </div>
+        <div class="parent">
+            <div class="self_define"><h1 class="i18n" name="Customization_mode_intro"></h1></div>
+        </div>
+        <div class="overall">
+            <div class="algorithms">
+                <h4 class="mark i18n" name="step9-1"><br></h4>
+                <h3 class="i18n" name="algorithms"></h3>
+                    <label class="algorithms"><input class="algorithms" type="checkbox" name="algorithms" value="Decision Tree" checked><span class="i18n" name="Decision_Tree"></span></label>
+                    <label class="algorithms"><input class="algorithms" type="checkbox" name="algorithms" value="Linear" checked><span class="i18n" name="Linear"></span></label>
+                    <label class="algorithms"><input class="algorithms" type="checkbox" name="algorithms" value="Random Forest" checked><span class="i18n" name="Random_Forest"></span></label>
+                    <label class="algorithms"><input class="algorithms" type="checkbox" name="algorithms" value="Extra Trees" checked><span class="i18n" name="Extra_Trees"></span></label>
+                    <label class="algorithms"><input class="algorithms" type="checkbox" name="algorithms" value="LightGBM" checked><span class="i18n" name="LightGBM"></span></label>
+                    <label class="algorithms"><input class="algorithms" type="checkbox" name="algorithms" value="Xgboost" checked><span class="i18n" name="XGBoost"></span></label>
+                    <label class="algorithms"><input class="algorithms" type="checkbox" name="algorithms" value="CatBoost" checked><span class="i18n" name="CatBoost"></span></label>
+                    <label class="algorithms"><input class="algorithms" type="checkbox" name="algorithms" value="Neural Network" checked><span class="i18n" name="Neural_Network"></span></label>
+                    <label class="algorithms"><input class="algorithms" type="checkbox" name="algorithms" value="Nearest Neighbors" checked><span class="i18n" name="Nearest_Neighbors"></span></label>  
+            </div>
+            <div class="ensemble_stacking">
+                <h4 class="mark i18n" name="step9-2"><br></h4>
+                <h3 class="i18n" name="Ensemble"></h3>
+                <h4 class="i18n but" name="introduce" onclick="ensemble()"></h4><br>
+                <div class="parent">
+                    <a target="_blank" href="https://supervised.mljar.com/features/stacking-ensemble/ "><span class="i18n" name="offical_doc"></span></a>
+                </div>
+                <!--220930以下是測試彈出說明內容-->
+                <div id="ensemble">
+                    <div id="window-pop">
+                        <div class="window-content">
+                            <span class="intro i18n" name="window_intro"></span>
+                            <span class="intro i18n" name="intro_ensemble"></span>
+                            <div class="parent">
+                                <span class="intro i18n" name="click_space_area_to_back"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--以上是測試彈出說明內容-->
+                <label><input class="train_ensemble" type="radio" name="train_ensemble" value=1 checked><span class="i18n" name="yes1"></span></label>
+                <label><input class="train_ensemble" type="radio" name="train_ensemble" value=0><span class="i18n" name="no1"></span></label>
+                
+            </div>
+            <div class="ensemble_stacking">
+                <h4 class="mark i18n" name="step9-3"><br></h4>
+                <h3 class="i18n" name="stacking"></h3>
+                <h4 class="i18n but" name="introduce" onclick="stacking()"></h4><br>
+                <div class="parent">
+                    <a target="_blank" href="https://supervised.mljar.com/features/stacking-ensemble/"><span class="i18n" name="offical_doc"></span></a>
+                </div>
+                <!--220930以下是測試彈出說明內容-->
+                <div id="stacking">
+                    <div id="window-pop">
+                        <div class="window-content">
+                            <span class="intro i18n" name="window_intro"></span>
+                            <span class="intro i18n" name="intro_stacking"></span>
+                            <div class="parent">
+                                <span class="intro i18n" name="click_space_area_to_back"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--以上是測試彈出說明內容-->
+                <label><input class="stack_models" type="radio" name="stack_models" value=1><span class="i18n" name="yes1"></span></label>
+                <label><input class="stack_models" type="radio" name="stack_models" value=0 checked><span class="i18n" name="no1"></span></label>
+                
+                
+            </div>
+            <div class="validation_strategy">
+                <h4 class="mark i18n" name="step9-4"><br></h4>
+                <h3 class="i18n" name="train-vali"></h3>
+                <label><input class="split" type="radio" name="validation_type" value="split" checked><span class="i18n" name="split"></span></label>
+                <label><input class="kfold" type="radio" name="validation_type" value="kfold"><span class="i18n" name="cv"></span></label>  
+                
+            </div>
+            <div class="vali_split">
+                <h4 class="mark i18n" name="step9-5"><br></h4>
+                <h3 class="i18n" name="train-vali-ratio"></h3>
+                <label><input class="vali_split" type="radio" name="vali_split" value="0.5"><span class="i18n" name="fifty-fifty"></span></label>
+                <label><input class="vali_split" type="radio" name="vali_split" value="0.75" checked><span class="i18n" name="seventy_five-twenty_five"></span></label>
+                <label><input class="vali_split" type="radio" name="vali_split" value="0.8"><span class="i18n" name="eighty-twenty"></span></label>
+                
+            </div>
+            <div class="vali_k_folds">
+                <h4 class="mark i18n" name="step9-5"><br></h4>
+                <h3 class="i18n" name="cv-ratio"></h3>
+                <label><input class="vali_k_folds" type="radio" name="vali_k_folds" value="3"><span class="i18n" name="3-fold"></span></label>
+                <label><input class="vali_k_folds" type="radio" name="vali_k_folds" value="5" checked><span class="i18n" name="5-fold"></span></label>
+                <label><input class="vali_k_folds" type="radio" name="vali_k_folds" value="10"><span class="i18n" name="10-fold"></span></label>
+               
+            </div>
+
+            <div class="Golden_Features">
+                <h4 class="mark i18n" name="step9-6"><br></h4>
+                <h3 class="mark i18n" name="Golden_Features"></h3>
+                <h4 class="i18n but" name="introduce" onclick="Golden_Features()"></h4><br>
+                <div class="parent">    
+                    <a target="_blank" href="https://supervised.mljar.com/features/golden_features/"><span class="i18n" name="offical_doc"></span></a>
+                </div>
+                <!--220930以下是測試彈出說明內容-->
+                <div id="Golden_Features">
+                    <div id="window-pop">
+                        <div class="window-content">
+                            <span class="intro i18n" name="window_intro"></span>
+                            <span class="intro i18n" name="intro_Golden_Features"></span>
+                            <div class="parent">
+                                <span class="intro i18n" name="click_space_area_to_back"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--以上是測試彈出說明內容-->
+                    <label><input class="Golden_Features" type="radio" name="Golden_Features" value=1><span class="i18n" name="yes1"></span></label>
+                    <label><input class="Golden_Features" type="radio" name="Golden_Features" value=0 checked><span class="i18n" name="no1"></span></label>
+                
+            </div>
+            <div class="features_selection">
+                <h4 class="mark i18n" name="step9-7"><br></h4>
+                <h3 class="mark i18n" name="features_selection"></h3>
+                <h4 class="i18n but" name="introduce" onclick="features_selection()"></h4><br>
+                <div class="parent">    
+                    <a target="_blank" href="https://supervised.mljar.com/features/features_selection/"><span class="i18n" name="offical_doc"></span></a></h4>
+                </div>
+                <!--220930以下是測試彈出說明內容-->
+                <div id="features_selection">
+                    <div id="window-pop">
+                        <div class="window-content">
+                            <span class="intro i18n" name="window_intro"></span>
+                            <span class="intro i18n" name="intro_features_selection"></span>
+                            <div class="parent">
+                                <span class="intro i18n" name="click_space_area_to_back"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--以上是測試彈出說明內容-->
+                <label><input class="features_selection" type="radio" name="features_selection" value=1><span class="i18n" name="yes1"></span></label>
+                <label><input class="features_selection" type="radio" name="features_selection" value=0 checked><span class="i18n" name="no1"></span></label>
+               
+            </div>
+            <div class="start_random_models">
+                <h4 class="mark i18n" name="step9-8"><br></h4>
+                <h3 class="mark i18n" name="start_random_models"></h3>
+                <div class="parent">
+                    <h4 class="i18n but" name="introduce" onclick="start_random_models()"></h4>
+                </div>
+                <!--220930以下是測試彈出說明內容-->
+                <div id="start_random_models">
+                    <div id="window-pop">
+                        <div class="window-content">
+                            <span class="intro i18n" name="window_intro"></span>
+                            <span class="intro i18n" name="intro_start_random_models"></span>
+                            <div class="parent">
+                                <span class="intro i18n" name="click_space_area_to_back"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--以上是測試彈出說明內容-->
+                <label><input class="start_random_models" type="radio" name="start_random_models" value="5" checked><span class="i18n" name="5-times"></span></label>
+                <label><input class="start_random_models" type="radio" name="start_random_models" value="10"><span class="i18n" name="10-times"></span></label>
+        
+                
+            </div>
+            <div class="hill_climbing_steps">
+                <h4 class="mark i18n" name="step9-9"><br></h4>
+                <h3 class="mark i18n" name="hill_climbing_steps"></h3>
+                <div class="parent">
+                    <h4 class="i18n but" name="introduce" onclick="hill_climbing_steps()"></h4>
+                </div>
+                <!--220930以下是測試彈出說明內容-->
+                <div id="hill_climbing_steps">
+                    <div id="window-pop">
+                        <div class="window-content">
+                            <span class="intro i18n" name="window_intro"></span>
+                            <span class="intro i18n" name="intro_hill_climbing_steps"></span>
+                            <div class="parent">
+                                <span class="intro i18n" name="click_space_area_to_back"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--以上是測試彈出說明內容-->
+                <label><input class="hill_climbing_steps" type="radio" name="hill_climbing_steps" value="2" checked><span class="i18n" name="top-2-times"></span></label>
+                <label><input class="hill_climbing_steps" type="radio" name="hill_climbing_steps" value="3"><span class="i18n" name="top-3-times"></span></label>
+            </div>
+        </div>
+        <div class="parent">
+            <button class="button" type=submit>
+                <span class="button_inner i18n" name="ML_para_submit">
+                    
+                </span>
+            </button>
+         </div>
+        
+    </form>
+
+    <div class="parent">
+        <form class="unsuper" action="/unsuper" method=post >
+        <h4 class="i18n" name="not_yet"></h4>
+            <img class="unsuper2" src="/static/pic/on_going.jpg">
+            <button class="unsuper_button" type=submit>
+                <span class="button_inner i18n" name="to_unsuper"></span>
+            </button>
+        
+        </form>
+    </div>
+    
+</body>
+<script src="static/i18n/jquery.js"></script><!--！！！！！！！注意這行要出現在body標籤下面語系表i18n才可生效！！！！！！！-->
+<script src="static/i18n/jquery.i18n.properties.js.js"></script><!--！！！！！！！注意這行要出現在body標籤下面語系表i18n才可生效！！！！！！！-->
+<script src="static/i18n/third-party-function.js"></script></script><!--！！！！！！！注意這行要出現在body標籤下面語系表i18n才可生效！！！！！！！-->
+</html>
